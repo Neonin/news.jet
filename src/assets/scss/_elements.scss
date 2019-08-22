@@ -1,0 +1,83 @@
+label {
+  display: block;
+}
+
+html {
+  box-sizing: border-box;
+  min-width: 320px;
+  height: 100%;
+
+  font-family: $font-family-base;
+  line-height: 1.4;
+
+  -ms-overflow-style: scrollbar;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+
+  min-width: 320px;
+  height: 100%;
+  overflow-x: hidden;
+
+  background: $body-bg;
+  opacity: 1;
+}
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+hr {
+  display: block;
+  height: 1px;
+  margin: 1em 0;
+  padding: 0;
+
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+input:not([type="checkbox"]):not([type="radio"]),
+textarea {
+  -webkit-appearance: none;
+}
+textarea {
+  resize: vertical;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+h1, .h1 {
+  font-size: $h1-font-size;
+}
+h2, .h2 {
+  font-size: $h2-font-size;
+}
+h3, .h3 {
+  font-size: $h3-font-size;
+}
+
+p {
+  font-size: $font-size-base;
+}
+a {
+  text-decoration: none;
+  outline: none;
+  &:hover {
+    text-decoration: none;
+    font-style: normal;
+  }
+  &:not(:hover) {
+    transition: ease 0.5s;
+  }
+}

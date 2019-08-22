@@ -1,0 +1,17 @@
+@import "bootstrap";
+
+@import "./variables";
+@import "./elements";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  min-height: 120px;
+  flex: 0 0 auto;
+}
