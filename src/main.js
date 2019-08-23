@@ -1,13 +1,17 @@
-import "@/assets/scss/main.scss";
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import '@/assets/scss/main.scss'
+import Vue from 'vue'
+import axios from 'axios'
 
-Vue.config.productionTip = false;
+import App from './App.vue'
+import router from './router'
+import store from './store'
+
+Vue.config.productionTip = false
+
+axios.defaults.baseURL = `https://newsapi.org/v2/`
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app')
