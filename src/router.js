@@ -26,7 +26,15 @@ export default new Router({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('./views/Profile.vue')
+      component: () => import('./views/Profile.vue'),
+      beforeEnter (to, from, next) {
+        const auth = localStorage.getItem('jwt-token')
+        if (auth) {
+          next()
+        } else {
+          next('/login?loginError=true')
+        }
+      }
     }
   ]
 })
