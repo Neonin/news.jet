@@ -1,24 +1,22 @@
 <template>
-  <div class="news mt-3 mb-3">
-    <div class="container">
-      <h1 class="mb-3">Новини України</h1>
-      <div class="row">
-        <div
-          v-for="(item, idx) in news"
-          :key="idx"
-          class="col-md-6 col-lg-4 mb-3"
-        >
-          <card-news :article="item" />
-        </div>
+  <div class="mt-3 mb-3 container">
+    <h1 class="mb-3">Новини України</h1>
+    <div class="row">
+      <div
+        v-for="(item, idx) in news"
+        :key="idx"
+        class="col-md-6 col-lg-4 mb-3"
+      >
+        <card-news :article="item" />
       </div>
-      <div class="row justify-content-center mt-4">
-        <button
-          class="btn btn-secondary btn-lg"
-          @click="fetchNews"
-        >
-          Більше новин
-        </button>
-      </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <button
+        class="btn btn-secondary btn-lg"
+        @click="fetchNews"
+      >
+        Більше новин
+      </button>
     </div>
   </div>
 </template>
