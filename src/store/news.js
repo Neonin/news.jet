@@ -8,13 +8,23 @@ const options = {
 export default {
   namespaced: true,
   state: {
-    news: []
+    news: [],
+    saveNews: []
   },
   mutations: {
     setNews (state, news) {
       news.forEach(item => {
         state.news.push(item)
       })
+    },
+    filterNewsList (state, news) {
+      state.news = state.news.filter(item => item.title !== news.title)
+    },
+    importSaveNews (state, news) {
+      state.saveNews = news
+    },
+    removeSaveNews (state, news) {
+      state.saveNews = state.saveNews.filter(item => item.title !== news.title)
     }
   },
   actions: {
@@ -32,6 +42,7 @@ export default {
     }
   },
   getters: {
-    getNews: state => state.news
+    getNews: state => state.news,
+    getSaveNews: state => state.saveNews
   }
 }
