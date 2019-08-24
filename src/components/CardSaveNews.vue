@@ -14,11 +14,10 @@
     </div>
     <div class="card-body card__actions">
       <button
-        v-if="isLogin"
-        class="btn btn-secondary"
-        @click.prevent="readLater"
+        class="btn btn-danger"
+        @click.prevent="remove"
       >
-        Зберегти
+        Видалити
       </button>
       <a :href="article.url" class="btn btn-primary" target="_blank">
         Перейти
@@ -45,26 +44,21 @@ export default {
       return sliced
     },
     getDescription () {
-      if (this.article.description) {
-        let sliced = this.article.description.slice(0, 120)
+      let sliced = this.article.description.slice(0, 120)
 
-        if (sliced.length < this.article.description.length) {
-          sliced += '...'
-        }
-        return sliced
+      if (sliced.length < this.article.description.length) {
+        sliced += '...'
       }
-      return ''
-    },
-    isLogin () {
-      return localStorage.getItem('jwt-token')
+      return sliced
     }
   },
   methods: {
-    readLater () {
+    remove () {
       let oldItems = JSON.parse(localStorage.getItem('listNews')) || []
-      oldItems.push(this.article)
 
-      this.$store.commit('news/filterNewsList', this.article)
+      oldItems = oldItems.filter(item => item.title !== this.article.title)
+
+      this.$store.commit('news/removeSaveNews', this.article)
       localStorage.setItem('listNews', JSON.stringify(oldItems))
     }
   }
