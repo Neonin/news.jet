@@ -19,6 +19,11 @@ export default new Router({
       component: () => import('./views/News.vue')
     },
     {
+      path: '/widget',
+      name: 'widget',
+      component: () => import('./views/Widget.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('./views/Login.vue')

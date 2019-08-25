@@ -10,6 +10,9 @@
             <router-link class="nav-item nav-link" active-class="active" to="/news">
               News
             </router-link>
+            <router-link class="nav-item nav-link" active-class="active" to="/widget">
+              Widget
+            </router-link>
             <router-link class="nav-item nav-link" active-class="active" to="/profile">
               Profile
             </router-link>
