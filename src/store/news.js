@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const options = {
+  baseURL: 'https://newsapi.org/v2/',
   token: '6dcb5f6d2a06444bbc60b04a8de62639',
   country: 'ua'
 }
@@ -30,7 +31,7 @@ export default {
   actions: {
     async fetchNews ({ commit }) {
       try {
-        const response = await axios.get(`/top-headlines?country=${options.country}&apiKey=${options.token}`)
+        const response = await axios.get(`${options.baseURL}/top-headlines?country=${options.country}&apiKey=${options.token}`)
         const data = response.data
 
         if (data.status === 'ok') {
