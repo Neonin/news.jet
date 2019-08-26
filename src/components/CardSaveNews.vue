@@ -44,12 +44,15 @@ export default {
       return sliced
     },
     getDescription () {
-      let sliced = this.article.description.slice(0, 120)
+      if (this.article.description) {
+        let sliced = this.article.description.slice(0, 120)
 
-      if (sliced.length < this.article.description.length) {
-        sliced += '...'
+        if (sliced.length < this.article.description.length) {
+          sliced += '...'
+        }
+        return sliced
       }
-      return sliced
+      return ''
     }
   },
   methods: {
