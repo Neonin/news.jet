@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="widget">
     <v-container>
       <v-row>
         <v-col>
@@ -7,9 +7,7 @@
             <v-card-text>
               <v-autocomplete
                 v-model="selected"
-                :items="cities"
-                :loading="isLoading"
-                :search-input.sync="search"
+                :items="dataCities"
                 chips
                 label="Пошук міста"
                 multiple
@@ -19,7 +17,6 @@
                 item-value="name"
                 hide-no-data
                 hide-selected
-                return-object
               >
                 <template v-slot:selection="data">
                   <v-chip
@@ -33,9 +30,11 @@
               </v-autocomplete>
             </v-card-text>
             <v-card-actions>
+              <v-spacer></v-spacer>
               <v-btn
                 :disabled="!selected.length"
                 @click="fetchWeather"
+                color="primary"
               >
                 Показати погоду
               </v-btn>
@@ -59,6 +58,7 @@
 
 <script>
 import CardCity from '@/components/CardCity'
+import dataCities from '@/data/cities'
 
 export default {
   components: {
@@ -68,11 +68,7 @@ export default {
     isLoading: false,
     selected: [],
     entries: [],
-    // cities: [
-    //   { name: 'Київ' },
-    //   { name: 'Хмельницький' },
-    //   { name: 'Львів' }
-    // ],
+    dataCities,
     search: null
   }),
   computed: {
@@ -91,9 +87,10 @@ export default {
   },
   methods: {
     remove (item) {
-      const index = this.selected.indexOf(item.name)
+      const idx = this.selected.indexOf(item.name)
 
-      if (index >= 0) this.selected.splice(index, 1)
+      this.$store.commit('weather/removeWeather', item.name)
+      if (idx >= 0) this.selected.splice(idx, 1)
     },
     fetchWeatherByCoord (lat, lng) {
       this.$store.dispatch('weather/fetchWeatherByCoord', { lat, lng })
@@ -106,3 +103,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.widget {
+  background: #3D7EAA;
+  background: -webkit-linear-gradient(to right, #FFE47A, #3D7EAA);
+  background: linear-gradient(to right, #FFE47A, #3D7EAA);
+}
+</style>
