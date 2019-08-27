@@ -8,6 +8,8 @@
               <v-autocomplete
                 v-model="selected"
                 :items="cities"
+                :loading="isLoading"
+                :search-input.sync="search"
                 chips
                 label="Пошук міста"
                 multiple
@@ -15,8 +17,9 @@
                 prepend-icon="mdi-flag"
                 item-text="name"
                 item-value="name"
-                hide-selected
                 hide-no-data
+                hide-selected
+                return-object
               >
                 <template v-slot:selection="data">
                   <v-chip
@@ -62,21 +65,34 @@ export default {
     CardCity
   },
   data: () => ({
+    isLoading: false,
     selected: [],
-    cities: [
-      { name: 'Київ' },
-      { name: 'Хмельницький' },
-      { name: 'Львів' }
-    ]
+    entries: [],
+    // cities: [
+    //   { name: 'Київ' },
+    //   { name: 'Хмельницький' },
+    //   { name: 'Львів' }
+    // ],
+    search: null
   }),
   computed: {
     getWeather () {
       return this.$store.getters['weather/getWeather']
+    },
+    cities () {
+      return this.entries.map(entry => {
+        const Description = entry.Description.length > this.descriptionLimit
+          ? entry.Description.slice(0, this.descriptionLimit) + '...'
+          : entry.Description
+
+        return Object.assign({}, entry, { Description })
+      })
     }
   },
   methods: {
     remove (item) {
       const index = this.selected.indexOf(item.name)
+
       if (index >= 0) this.selected.splice(index, 1)
     },
     fetchWeather () {
