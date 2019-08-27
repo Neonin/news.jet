@@ -106,8 +106,8 @@ export default {
 
 <style lang="scss" scoped>
 .widget {
-  background: #3D7EAA;
-  background: -webkit-linear-gradient(to right, #FFE47A, #3D7EAA);
-  background: linear-gradient(to right, #FFE47A, #3D7EAA);
+  background: #3D7EAA !important;
+  background: -webkit-linear-gradient(to right, #FFE47A, #3D7EAA) !important;
+  background: linear-gradient(to right, #FFE47A, #3D7EAA) !important;
 }
 </style>
