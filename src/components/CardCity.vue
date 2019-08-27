@@ -9,13 +9,14 @@
 
     <v-card-text>
       <v-row align="center">
-        <v-col class="display-3" cols="6">
-          {{ Math.round(dataWeather.main.temp) }}&deg;C
+        <v-col cols="6">
+          <div class="display-3">{{ Math.round(dataWeather.main.temp) }}&deg;C</div>
+          <div>{{ dataWeather.weather[0].description }}</div>
         </v-col>
         <v-col cols="6">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sun.png"
-            alt="Sunny image"
+            :src="require(`@/assets/img/svg/${dataWeather.weather[0].icon}.svg`)"
+            :alt="dataWeather.weather[0].description"
             width="92"
           ></v-img>
         </v-col>
