@@ -12,12 +12,20 @@ export default {
     weather: []
   },
   mutations: {
-    setWeather (state, weather) {
-      const candidate = state.weather.find(c => c.id === weather.id)
+    setWeather (state, { data, city }) {
+      const candidate = state.weather.find(c => c.id === data.id)
 
       if (!candidate) {
-        state.weather.push(weather)
+        if (city) data.city = city
+
+        state.weather.push(data)
       }
+    },
+    clearWeather (state) {
+      state.weather = []
+    },
+    removeWeather (state, item) {
+      state.weather = state.weather.filter(c => c.city !== item)
     }
   },
   actions: {
@@ -26,9 +34,19 @@ export default {
         const response = await axios.get(`${options.baseURL}/weather?q=${city}&units=metric&lang=${options.lang}&appid=${options.token}`)
         const data = response.data
 
-        commit('setWeather', data)
-      } catch (error) {
-        console.log(error)
+        commit('setWeather', { data, city })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async fetchWeatherByCoord ({ commit }, { lat, lng }) {
+      try {
+        const response = await axios.get(`${options.baseURL}/weather?lat=${lat}&lon=${lng}&units=metric&lang=${options.lang}&appid=${options.token}`)
+        const data = response.data
+
+        commit('setWeather', { data })
+      } catch (err) {
+        console.log(err)
       }
     }
   },

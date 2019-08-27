@@ -78,22 +78,25 @@ export default {
   computed: {
     getWeather () {
       return this.$store.getters['weather/getWeather']
-    },
-    cities () {
-      return this.entries.map(entry => {
-        const Description = entry.Description.length > this.descriptionLimit
-          ? entry.Description.slice(0, this.descriptionLimit) + '...'
-          : entry.Description
-
-        return Object.assign({}, entry, { Description })
-      })
     }
+  },
+  mounted () {
+    this.$getLocation()
+      .then(coordinates => {
+        this.fetchWeatherByCoord(coordinates.lat, coordinates.lng)
+      })
+      .catch(() => {
+        alert('Для показу погоди у Вашому місті, дозвольте перегляд ваших геоданих або виберіть місто зі списку.')
+      })
   },
   methods: {
     remove (item) {
       const index = this.selected.indexOf(item.name)
 
       if (index >= 0) this.selected.splice(index, 1)
+    },
+    fetchWeatherByCoord (lat, lng) {
+      this.$store.dispatch('weather/fetchWeatherByCoord', { lat, lng })
     },
     fetchWeather () {
       this.selected.forEach(item => {
